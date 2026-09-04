@@ -10,13 +10,18 @@ client.Connect(IPAddress.Loopback, 5000);
 
 Console.WriteLine("Connected!");
 
-
 NetworkStream stream = client.GetStream();
 
 byte[] buffer = new byte[1024];
 
-int bytesRead = stream.Read(buffer);
+while (true)
+{
+    int bytesCount = stream.Read(buffer);
 
-string message = Encoding.UTF8.GetString(buffer, 0, bytesRead);
+    string message = Encoding.UTF8.GetString(buffer, 0, bytesCount);
 
-System.Console.WriteLine($"Received message: {message}.");
+    string[] telemetry = message.Split(", ");
+
+    Console.WriteLine($"Distance: {telemetry[0]} mm.");
+    Console.WriteLine($"Battery: {telemetry[1]}.");
+}

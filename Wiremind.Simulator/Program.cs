@@ -14,10 +14,21 @@ Console.WriteLine("Client connected!");
 
 NetworkStream stream = client.GetStream();
 
-string message = "457";
+Random random = new();
 
-byte[] data = Encoding.UTF8.GetBytes(message);
+while (true)
+{
+    int distance = random.Next(100, 1000);
+    int battery = random.Next(1, 101);
 
-stream.Write(data);
+    string message = distance.ToString() + ", " + battery.ToString();
 
-Console.WriteLine($"Send message: {message}.");
+    byte[] data = Encoding.UTF8.GetBytes(message);
+
+    stream.Write(data);
+
+    Console.WriteLine($"Send distance: {distance} mm.");
+    Console.WriteLine($"Send battery: {battery}.");
+
+    Thread.Sleep(500);
+}
