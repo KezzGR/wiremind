@@ -1,0 +1,4 @@
+<Solution>
+  <Project Path="Wiremind.Desktop/Wiremind.Desktop.csproj" />
+  <Project Path="Wiremind.Simulator/Wiremind.Simulator.csproj" />
+</Solution>
