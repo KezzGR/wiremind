@@ -26,7 +26,7 @@ while (true)
     if (random.NextDouble() < 0.1 && battery > 0)
         battery -= 1;
 
-    string message = distance.ToString() + ", " + battery.ToString();
+    string message = distance.ToString() + ", " + battery.ToString() + "\n";
 
     byte[] data = Encoding.UTF8.GetBytes(message);
 

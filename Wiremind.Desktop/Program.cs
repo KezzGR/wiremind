@@ -11,14 +11,17 @@ client.Connect(IPAddress.Loopback, 5000);
 Console.WriteLine("Connected!");
 
 NetworkStream stream = client.GetStream();
-
-byte[] buffer = new byte[1024];
+StreamReader reader = new(stream, Encoding.UTF8);
 
 while (true)
 {
-    int bytesCount = stream.Read(buffer);
+    string? message = reader.ReadLine();
 
-    string message = Encoding.UTF8.GetString(buffer, 0, bytesCount);
+    if (message is null)
+    {
+        Console.WriteLine("Simulator disconnected.");
+        break;
+    }
 
     string[] telemetry = message.Split(", ");
 
