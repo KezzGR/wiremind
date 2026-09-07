@@ -15,11 +15,16 @@ Console.WriteLine("Client connected!");
 NetworkStream stream = client.GetStream();
 
 Random random = new();
+int distance = 400;
+int battery = 100;
 
 while (true)
 {
-    int distance = random.Next(100, 1000);
-    int battery = random.Next(1, 101);
+    distance = random.Next(distance - 10, distance + 10);
+    distance = Math.Clamp(distance, 100, 1000);
+
+    if (random.NextDouble() < 0.1 && battery > 0)
+        battery -= 1;
 
     string message = distance.ToString() + ", " + battery.ToString();
 
