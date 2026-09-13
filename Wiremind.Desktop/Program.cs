@@ -1,6 +1,7 @@
 ﻿using System.Net;
 using System.Net.Sockets;
 using System.Text;
+using Wiremind.Desktop;
 
 TcpClient client = new();
 
@@ -15,15 +16,13 @@ StreamReader reader = new(stream, Encoding.UTF8);
 
 while (true)
 {
-    string? message = reader.ReadLine();
+    string[]? telemetry = TelemetryReader.Read(reader);
 
-    if (message is null)
+    if (telemetry is null)
     {
         Console.WriteLine("Simulator disconnected.");
         break;
     }
-
-    string[] telemetry = message.Split(", ");
 
     Console.WriteLine($"Distance: {telemetry[0]} mm.");
     Console.WriteLine($"Battery: {telemetry[1]}.");
